@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SIGN UP</title>
+</head>
+<body>   
+<form>
+    <br/>
+	<center>
+        <br/><br/><br/>
+        <h1> <center> Sign Up Page</h1>
+        <br/>
+        <label for="name"></label> 
+        <input type="text" name="userName" id="userName" placeholder="Enter Your Name"required autofocus><br/>
+        <br/>
+        <label for="number"></label> 
+        <input type="number" name="registerNumber" id="regNumber" placeholder="Enter Register Number"required autofocus><br/>
+        <br/>
+        <input type="password" name="newPassword" id="signupNewPassword" placeholder="Enter New Password" required autofocus><br/>
+        <br/>
+        <input type="password" name="reenter" id="signupReenterPassword" placeholder="Re-Enter New Password" required autofocus><br/>
+        <br/>
+        <button type="submit" onclick="signUp()">Submit</button>
+        <button type="reset">Reset</button>
+        <br/>
+        <label for="validation" id="loginValidation"></label>
+        <br/><br/>
+    </center>
+</form>
+<script>
+    function signUp()
+    {
+        event.preventDefault();
+        let signupName=document.querySelector("#userName").value;   
+        let RegNumber=document.querySelector("#regNumber").value;                 
+        let Password=document.querySelector("#signupNewPassword").value;
+        let ReenterPassword=document.querySelector("#signupReenterPassword").value; 
+        let signupPasswordArray=localStorage.getItem("dob");
+        let signupPassword=JSON.parse(signupPasswordArray);
+        let signupRegisterNumberArray=localStorage.getItem("reg");
+        let signupRegisterNumber=JSON.parse(signupRegisterNumberArray);
+        if(Password==ReenterPassword)
+        {
+            signupRegisterNumber.push(RegNumber);
+            signupPassword.push(Password);
+            localStorage.setItem("newnumber",JSON.stringify(signupRegisterNumber));
+            localStorage.setItem("newpass",JSON.stringify(signupPassword));
+            window.location.href="Signin.html";
+        }	                
+        else
+        {
+            document.getElementById("loginValidation").innerHTML="----Enter the same password----";
+        }	
+    }
+</script>
+</body>    
+</html>

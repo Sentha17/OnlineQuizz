@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SIGN IN</title>
+</head>
+<body>   
+<form>
+    <br/>
+	<center>
+        <br/><br/><br/>
+        <h1> <center> Sign In Page</h1>
+        <br/>
+        <label for="number"></label> 
+        <input type="number" name="registerNumber" id="regno" placeholder="Enter Register Number"required autofocus><br/>
+        <br/>
+        <label for="password"></label>
+        <input type="password" name="dateOfBirth" id="dob" placeholder="DD-MM-YYYY"required autofocus><br/>
+        <br/>
+        <button type="submit" onclick="signin()">Sign In</button>
+        <button type="reset">Reset</button>
+        <br/><br/>
+        <label for="forgotpassword">Forgot Password? </label> 
+        <button type="button" onclick="forgot()">Forgot Password</button>
+        <br><br>
+        <label for="validation" id="loginValidation"></label>
+        <br/><br/>
+        <label for="forgotpassword">-------------------------------------------------</label> 
+        <br/>
+        <label for="forgotpassword">New User? </label> 
+        <button type="button" onclick="signup()">Sign Up</button>
+    </center>
+</form>
+<script>
+    function signin()
+    {
+        event.preventDefault();
+        let regNumber=document.querySelector("#regno").value;                  
+        let dateOfBirth=document.querySelector("#dob").value;
+        let registerNumberArray = ["001","002","003","004","005"];
+        let dobArray=["01-01-2000","02-02-2000","03-03-2000","04-04-2000","05-05-2000"];
+        localStorage.setItem("user",regNumber);
+        localStorage.setItem("reg",JSON.stringify(registerNumberArray));
+        localStorage.setItem("dob",JSON.stringify(dobArray));
+        let newPasswordArray=localStorage.getItem("newpass");
+        dobArray=JSON.parse(newPasswordArray);
+        let newRegisterNumberArray=localStorage.getItem("newnumber");
+        registerNumberArray=JSON.parse(newRegisterNumberArray);
+        if(registerNumberArray.includes(regNumber) && dobArray.includes(dateOfBirth))
+		{
+			if(registerNumberArray.indexOf(regNumber)==dobArray.indexOf(dateOfBirth))
+			{
+                window.location.href="ListOfSubjects.html";
+			}	
+            else
+            {
+                document.getElementById("loginValidation").innerHTML="----Invalid Password----";
+            }	
+		}
+		else
+		{
+			document.getElementById("loginValidation").innerHTML="----Invalid Login Credentials----";
+		}
+    }
+    function forgot()
+    {
+        event.preventDefault();
+        window.location.href="ForgotPassword.html";
+
+    }
+    function signup()
+    {
+        event.preventDefault();
+        window.location.href="Signup.html";
+
+    }
+
+</script>
+</body>
+</html>
